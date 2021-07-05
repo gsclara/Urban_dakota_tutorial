@@ -2,6 +2,13 @@
 
 Coupling of OpenFOAM libraries and Dakota for uncertainty quantificatioon purposes.
 
+Part of the codes used have been used from the freely accessible resources online (https://www.ehsanmadadi.com/cylinder-mesh/, https://holzmann-cfd.com/community/training-cases/geometric-variation)
+
+Part of the codes have been developed within out group by: N. Hobeika, I. Padjen and C. Garcia-Sanchez
+
+Other contributors: J. Sousa, C. Gorle
+
+
 ## What is inside?
 
 casebase1.zip: openFOAM case folder with the cases from 0-90 degres in wind direction
