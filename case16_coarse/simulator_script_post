@@ -1,0 +1,57 @@
+#!/bin/bash
+# $1 is params.in FROM Dakota
+# $2 is results.out returned to Dakota
+
+# Description
+#   Run the dakota tool and run the process chain
+# ------------------------------------------------------------------------------
+
+# Assign $1 and $2 to variables and reset because they seem to interferewith
+# OpenFOAM's postProcess and sourcing
+# ------------------------------------------------------------------------------
+infile=$1
+outfile=$2
+set --
+
+# Dakota change the parameters in this file
+# ------------------------------------------------------------------------------
+dprepro $infile initialConditions.template initialConditions.in
+
+# Run simulation with new parameter set
+# ------------------------------------------------------------------------------
+
+    # Get uref, udir, z0 + loop number
+    #---------------------------------------------------------------------------
+    Uref=$(grep 'Uref' initialConditions.in | awk ' {print substr($2, 0, length($2)-1)}')
+    Dref=$(grep 'Dref' initialConditions.in | awk ' {print substr($2, 0, length($2)-1)}')
+    loopNumber=$(echo $infile | awk -F. '{print $NF}')
+
+    # Transform the scientific notation into a readable format for | bc
+    # Here we remove e or E with *10^
+    #---------------------------------------------------------------------------
+    Uref=`echo $Uref | sed -e 's/[eE]+*/\*10\^/'`
+    Dref=`echo $Dref | sed -e 's/[eE]+*/\*10\^/'`
+
+    # Optical stuff
+    #---------------------------------------------------------------------------
+    Uref=`echo "scale=4; $Uref" | bc`
+    Dref=`echo "scale=4; $Dref" | bc`
+
+    # Output the parameters that are used now
+    #---------------------------------------------------------------------------
+    >&2 echo -e "   ++++ Evaluate sample $loopNumber"
+    >&2 echo -e "   |"
+    >&2 echo -e "   |--> Uref = $Uref [m/s]"
+    >&2 echo -e "   |--> beta = $Dref [deg]"
+
+    #------------------------------------------------------------------------------
+    >&2 echo "   |--> Post-process with python"
+    #python ../postProcess/compute_surface_Umag.py
+    #python ../postProcess/compute_surface_Udir.py
+    python ../postProcess/compute_Umag_Udir.py
+
+    #------------------------------------------------------------------------------
+    >&2 echo "   |--> Send output back to dakota"
+    mv output_Utheta.txt $outfile
+    echo "Finished simulation in:"
+    pwd
