@@ -1,0 +1,16 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  8
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+
+Uref                 {x1};	// in m/s
+Dref                 {x2};	// in deg
+flowVelocity         (Ucomp1 Ucomp2 0);
+pressure             0;
+tkeInlet             tkeInitial;
+epsilonInlet         epsilonInitial;
+
+// ************************************************************************* //
