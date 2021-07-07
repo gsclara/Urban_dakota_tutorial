@@ -51,7 +51,6 @@ dprepro $infile initialConditions.template initialConditions.in
     Ucomp2=`echo "s($Dref*$pi/180)*$Uref" | bc -l`                                          # compute second component of velocity (V) for OF
     cp -r ../cube_case/* .                                                                  # copy the test case template
     cd constant/polyMesh/                                                                   # get into the mesh folder
-#    cp -rs ../../../mesh/polyMesh/* .                                                       # link the mesh to avoid duplicating files that are large
     cp -r ../../../mesh/polyMesh/* .
     cd ../../                                                                               # get back to the current workdir
     sed 's/Ucomp1/'${Ucomp1}'/g' initialConditions.in > initialConditions.1                 # input the first component of velocity (U) in initialConditions file
@@ -88,9 +87,7 @@ dprepro $infile initialConditions.template initialConditions.in
     # Postprocess (with python)
     #------------------------------------------------------------------------------
     >&2 echo "   |--> Post-process with python"                                             # this step is needed since the output is a 3 component vector, and we need both variables together
-    #python ../postProcess/compute_surface_Umag.py > output_Utheta.txt                       # run postprocessing rutine with python to compute the velocity magnitue in all the surface
-    #python ../postProcess/compute_surface_Udir.py >> output_Utheta.txt                      # run postprocessing rutine with python to compute the velocity direction in all the surface
-    python ../postProcess/compute_Umag_Udir.py
+    python ../postProcess/compute_Umag_Udir_probes.py
     #------------------------------------------------------------------------------
     >&2 echo "   |--> Send output back to dakota"
     mv output_Utheta.txt $outfile                                                           # give the final results to dakota to postProcess

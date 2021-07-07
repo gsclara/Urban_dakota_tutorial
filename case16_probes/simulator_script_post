@@ -46,8 +46,6 @@ dprepro $infile initialConditions.template initialConditions.in
 
     #------------------------------------------------------------------------------
     >&2 echo "   |--> Post-process with python"
-    #python ../postProcess/compute_surface_Umag.py
-    #python ../postProcess/compute_surface_Udir.py
     python ../postProcess/compute_Umag_Udir_probes.py
 
     #------------------------------------------------------------------------------
