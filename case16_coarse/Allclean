@@ -1,0 +1,6 @@
+#!/bin/bash
+rm -rf workdir.* 
+rm -rf dakota.* 
+rm -rf table_out.dat
+rm -rf stdout.out
+rm -rf LHS_*
