@@ -84,8 +84,6 @@ dprepro $infile initialConditions.template initialConditions.in
     # Postprocess (with python)
     #------------------------------------------------------------------------------
     >&2 echo "   |--> Post-process with python"                                             # this step is needed since the output is a 3 component vector, and we need both variables together
-    #python ../postProcess/compute_surface_Umag.py > output_Utheta.txt                       # run postprocessing rutine with python to compute the velocity magnitue in all the surface
-    #python ../postProcess/compute_surface_Udir.py >> output_Utheta.txt                      # run postprocessing rutine with python to compute the velocity direction in all the surface
     python ../postProcess/compute_Umag_Udir.py
     #------------------------------------------------------------------------------
     >&2 echo "   |--> Send output back to dakota"
