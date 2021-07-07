@@ -26,6 +26,14 @@ Inside both cases the same structure is set-up with slight differences:
 + dakota_pce_cube.in: input file for dakota that uses simulator_script
 + dakota_pce_cube_post.in: input file for dakota that use simulator_script_post
 
+## How to run it?
+
++ clone the repository to your computer, and be sure you have OF8 and dakota6.13
++ lines to modify from the simulator_script:
+    + (line 69) you need to sourc your own OpenFOAM installation
+    + (line 76) if you do not have 8 processors, you will need to modify accordingly to availability in your system
+    + according to the previous line you will need to change cube_case/system/decomposeParDict accordingly to the number of processors you use as well 
+
 ## Features
 
 The current set-up works with OpenFOAM 8 and Dakota 6.13.
