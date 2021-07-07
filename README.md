@@ -17,12 +17,14 @@ case16_coarse: uncertainty quantification case for quasi-2D flow around a cube w
 
 Inside both cases the same structure is set-up with slight differences: 
 
-- cube_case: is the template case that is copied for each of the evaluations
-- postProcess: contains the python rutines to extract the probes/surfaces values for Umag/Udir and put them into a format that dakota can read
-- simulator_script: it is the script that controls all the tasks performed by dakota
-- simulator_script_post: same as the previous one but tricks dakota into doing only post-process (since we do not have pre-post feature in PCE, to use when all evaluations are run and just the post-process is missing)
-- dakota_pce_cube.in: input file for dakota that uses simulator_script
-- dakota_pce_cube_post.in: input file for dakota that use simulator_script_post
++ cube_case: is the template case that is copied for each of the evaluations
++ postProcess: contains the python rutines to extract the probes/surfaces values for Umag/Udir and put them into a format that dakota can read
+    + compute_Umag_Udir.py: it is run by the simulator_script/simulator_script_post and reads the results.N for each file and compiles a full file that then is used as input for dakota
+    + extractStatsDakota.py: script to read mean/var/skew/kurt statistics from dakota.out file and put them into surface form (if post-process is with surfaces)
++ simulator_script: it is the script that controls all the tasks performed by dakota
++ simulator_script_post: same as the previous one but tricks dakota into doing only post-process (since we do not have pre-post feature in PCE, to use when all evaluations are run and just the post-process is missing)
++ dakota_pce_cube.in: input file for dakota that uses simulator_script
++ dakota_pce_cube_post.in: input file for dakota that use simulator_script_post
 
 ## Features
 
