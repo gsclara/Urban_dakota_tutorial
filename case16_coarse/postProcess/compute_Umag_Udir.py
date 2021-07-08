@@ -4,7 +4,7 @@ import math
 
 #Saving Umag to txt
 
-grid = pyvista.PolyData('../../workdir.1/postProcessing/surfaces/3000/U_zNormal.vtk')
+grid = pyvista.PolyData('postProcessing/surfaces/3000/U_zNormal.vtk')
 values=grid.point_arrays['U']
 val=np.asarray(values)
 

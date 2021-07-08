@@ -1,7 +1,7 @@
 import numpy as np 
 import math
 
-f = open('../../workdir.1/postProcessing/probes/0/U', "r")
+f = open('postProcessing/probes/0/U', "r")
 
 c=0
 for line in f:
