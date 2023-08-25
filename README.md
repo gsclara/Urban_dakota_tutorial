@@ -30,7 +30,7 @@ Inside both cases the same structure is set-up with slight differences:
 
 + clone the repository to your computer, and be sure you have OF8 and dakota6.13
 + lines to modify from the simulator_script:
-    + (line 69) you need to sourc your own OpenFOAM installation
+    + (line 69) you need to source your own OpenFOAM installation
     + (line 76) if you do not have 8 processors, you will need to modify accordingly to availability in your system
     + according to the previous line you will need to change cube_case/system/decomposeParDict accordingly to the number of processors you use as well 
 + to run dakota: "dakota -i dakota_pce_cube.in -o dakota.out > stdout.out &"
